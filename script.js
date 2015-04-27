@@ -9,7 +9,7 @@
 // get all the elements with class of 
 // dictionary-neodict-translation-translation
 
-var palabras = $('.dictionary-neodict-translation-translation');
+var palabras = $('.dictionary-neodict-translation-translation, .def');
 
 palabras.each(function() {
     var palabra,
@@ -27,8 +27,14 @@ palabras.each(function() {
     if(parts.length == 1) {
         palabra = parts[0];
     } else if(parts.length == 2) {
-        palabra = parts[1];
-        articulo = parts[0];
+        // check if the first part is el or la.  If not, then it is
+        // the actual word
+        if(parts[0] == 'el' || parts[0] == 'la') {
+            palabra = parts[1];
+            articulo = parts[0];
+        } else {
+            palabra = parts[0];
+        }
     } else {
         return;
     }
@@ -42,3 +48,4 @@ palabras.each(function() {
 
     wordSpan.empty().append(a);
 });
+
