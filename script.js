@@ -25,6 +25,10 @@ palabras.each(function() {
     // that are 1 or 2 words long.  Sometimes a longer phrase can appear
     // but these phrases do not have direct api entries
     if(parts.length == 1) {
+        // if the first character is a number, ignore it - the def class is used
+        // around outline numbers as well as words
+        if(!isNaN(parseInt(parts[0].substr(0))))
+            return;
         palabra = parts[0];
     } else if(parts.length == 2) {
         // check if the first part is el or la.  If not, then it is
